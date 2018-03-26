@@ -87,7 +87,7 @@ def create_folder(drive, folder_name, parent_folder_id):
     return folder['id']
 
 
-def upload_files(drive, folder_id, src_folder_name):
+def upload_files(drive, folder_id, src_folder_name, dst_folder_name):
     """ 
         Upload files in the local folder to Google Drive 
     """
@@ -103,12 +103,16 @@ def upload_files(drive, folder_id, src_folder_name):
         # Check the file's size
         statinfo = stat(file1)
         if statinfo.st_size > 0:
-            print('uploading ' + file1)
-            # Upload file to folder.
-            f = drive.CreateFile(
-                {"parents": [{"kind": "drive#fileLink", "id": folder_id}]})
-            f.SetContentFile(file1)
-            f.Upload()
+            if os.path.isfile(file1):
+                print('uploading file ' + file1)
+                # Upload file to folder.
+                f = drive.CreateFile(
+                    {"parents": [{"kind": "drive#fileLink", "id": folder_id}]})
+                f.SetContentFile(file1)
+                f.Upload()
+            else if os.path.isdir(file1):
+                print('uploading folder ' + file1)
+                upload_folder(file1,file1,dst_folder_name)
         # Skip the file if it's empty
         else:
             print('file {0} is empty'.format(file1))
@@ -138,4 +142,4 @@ def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab No
         print('folder {0} already exists'.format(dst_folder_name))
 
     # Upload the files    
-    upload_files(drive, folder_id, src_folder_name)
+    upload_files(drive, folder_id, src_folder_name, dst_folder_name)
