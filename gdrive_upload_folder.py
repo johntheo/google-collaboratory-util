@@ -110,7 +110,7 @@ def upload_files(drive, folder_id, src_folder_name, dst_folder_name):
                     {"parents": [{"kind": "drive#fileLink", "id": folder_id}]})
                 f.SetContentFile(file1)
                 f.Upload()
-            else if os.path.isdir(file1):
+            elif os.path.isdir(file1):
                 print('uploading folder ' + file1)
                 upload_folder(file1,file1,dst_folder_name)
         # Skip the file if it's empty
