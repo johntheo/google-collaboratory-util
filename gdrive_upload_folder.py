@@ -23,31 +23,16 @@ from sys import exit
 import ast
 
 
-def parse_args():
-    """ 
-        Parse arguments
-    """
-
-    parser = ArgumentParser(
-        description="Upload local folder to Google Drive")
-    parser.add_argument('-s', '--source', type=str, 
-                        help='Folder to upload')
-    parser.add_argument('-d', '--destination', type=str, 
-                        help='Destination Folder in Google Drive')
-    parser.add_argument('-p', '--parent', type=str, 
-                        help='Parent Folder in Google Drive')
-
-    return parser.parse_args()
-
-
 def authenticate():
     """ 
         Authenticate to Google API
     """
-
+    auth.authenticate_user()
     gauth = GoogleAuth()
+    gauth.credentials = GoogleCredentials.get_application_default()
+    drive = GoogleDrive(gauth)
 
-    return GoogleDrive(gauth)
+    return drive
 
 
 def get_folder_id(drive, parent_folder_id, folder_name):
