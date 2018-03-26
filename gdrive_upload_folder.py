@@ -41,9 +41,12 @@ def get_folder_id(drive, parent_folder_id, folder_name):
     """ 
         Check if destination folder exists and return it's ID
     """
+    print("PARENT FOLDER ID: {0} | FOLDER NAME: {1}".format(parent_folder_id,folder_name))
+    
 
     # Auto-iterate through all files in the parent folder.
     file_list = GoogleDriveFileList()
+    print(file_list)
     try:
         file_list = drive.ListFile(
             {'q': "'{0}' in parents and trashed=false".format(parent_folder_id)}
