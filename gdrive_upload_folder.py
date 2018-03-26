@@ -20,7 +20,7 @@ import googleapiclient.errors
 
 # Import general libraries
 from argparse import ArgumentParser
-from os import chdir, listdir, stat
+from os import chdir, listdir, stat, path
 from sys import exit
 import ast
 
@@ -103,14 +103,14 @@ def upload_files(drive, folder_id, src_folder_name, dst_folder_name):
         # Check the file's size
         statinfo = stat(file1)
         if statinfo.st_size > 0:
-            if os.path.isfile(file1):
+            if path.isfile(file1):
                 print('uploading file ' + file1)
                 # Upload file to folder.
                 f = drive.CreateFile(
                     {"parents": [{"kind": "drive#fileLink", "id": folder_id}]})
                 f.SetContentFile(file1)
                 f.Upload()
-            elif os.path.isdir(file1):
+            elif path.isdir(file1):
                 print('uploading folder ' + file1)
                 upload_folder(file1,file1,dst_folder_name)
         # Skip the file if it's empty
