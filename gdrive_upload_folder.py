@@ -13,6 +13,8 @@ from __future__ import (unicode_literals, absolute_import, print_function,
 # Import Google libraries
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from google.colab import auth
+from oauth2client.client import GoogleCredentials
 from pydrive.files import GoogleDriveFileList
 import googleapiclient.errors
 
