@@ -142,6 +142,3 @@ def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab No
 
     # Upload the files    
     upload_files(drive, folder_id, src_folder_name, dst_folder_name, parent_folder_name)
-
-
-def upload_rfoldersrc_folder_name
