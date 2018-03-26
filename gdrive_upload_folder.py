@@ -112,13 +112,13 @@ def upload_files(drive, folder_id, src_folder_name, dst_folder_name):
                 f.Upload()
             elif path.isdir(file1):
                 print('uploading folder ' + file1)
-                upload_folder(file1,dst_folder_name,dst_folder_name)
+                upload_folder(file1,file1,dst_folder_name,dst_folder_name)
         # Skip the file if it's empty
         else:
             print('file {0} is empty'.format(file1))
 
 
-def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab Notebooks'):
+def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab Notebooks', root='root'):
     """ 
         Upload Folder
 
@@ -131,7 +131,7 @@ def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab No
     # Authenticate to Google API
     drive = authenticate()
     # Get parent folder ID
-    parent_folder_id = get_folder_id(drive, 'root', parent_folder_name)
+    parent_folder_id = get_folder_id(drive, root, parent_folder_name)
     # Get destination folder ID
     folder_id = get_folder_id(drive, parent_folder_id, dst_folder_name)
     # Create the folder if it doesn't exists
