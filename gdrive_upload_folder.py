@@ -115,10 +115,25 @@ def upload_files(drive, folder_id, src_folder_name, dst_folder_name, parent_fold
                 f.Upload()
             elif path.isdir(file1):
                 print('uploading folder ' + file1)
-                upload_folder(file1,file1,dst_folder_name,folder_id)
+                upload(file1,folder_id,file1,dst_folder_name)
         # Skip the file if it's empty
         else:
             print('file {0} is empty'.format(file1))
+            
+def upload(src_folder_name,parent_folder_id,dst_folder_name,parent_folder_name):
+    drive = authenticate()
+    
+    # Get destination folder ID
+    folder_id = get_folder_id(drive, parent_folder_id, dst_folder_name)
+    # Create the folder if it doesn't exists
+    if not folder_id:
+        print('creating folder ' + dst_folder_name)
+        folder_id = create_folder(drive, dst_folder_name, parent_folder_id)
+    else:
+        print('folder {0} already exists'.format(dst_folder_name))
+
+    # Upload the files    
+    upload_files(drive, folder_id, src_folder_name, dst_folder_name, parent_folder_name)
 
 def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab Notebooks', root='root'):
     """ 
