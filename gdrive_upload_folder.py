@@ -112,7 +112,7 @@ def upload_files(drive, folder_id, src_folder_name, dst_folder_name):
                 f.Upload()
             elif path.isdir(file1):
                 print('uploading folder ' + file1)
-                upload_folder(file1,file1,dst_folder_name)
+                upload_folder(file1,dst_folder_name,dst_folder_name)
         # Skip the file if it's empty
         else:
             print('file {0} is empty'.format(file1))
