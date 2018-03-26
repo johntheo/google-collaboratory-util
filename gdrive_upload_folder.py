@@ -112,11 +112,10 @@ def upload_files(drive, folder_id, src_folder_name, dst_folder_name, parent_fold
                 f.Upload()
             elif path.isdir(file1):
                 print('uploading folder ' + file1)
-                upload_folder(file1,file1,dst_folder_name,parent_folder_name)
+                upload_folder(file1,file1,dst_folder_name,folder_id)
         # Skip the file if it's empty
         else:
             print('file {0} is empty'.format(file1))
-
 
 def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab Notebooks', root='root'):
     """ 
@@ -143,3 +142,6 @@ def upload_folder(src_folder_name, dst_folder_name, parent_folder_name='Colab No
 
     # Upload the files    
     upload_files(drive, folder_id, src_folder_name, dst_folder_name, parent_folder_name)
+
+
+def upload_rfoldersrc_folder_name
